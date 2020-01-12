@@ -2,6 +2,7 @@ The MIT License (MIT)
 
 Copyright (c) 2005-2015 Julius project team, Lee Lab., Nagoya Institute of Technology
 Copyright (c) 2008 Ryuichi Nisimura 
+Copyright (c) 2020 Kazuyuki Hiroshiba
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -2,7 +2,7 @@
 #
 # forced alignment using Julius
 #
-# usage: segment_julius.pl dir
+# usage: segment_julius.pl --datadir=dir
 #
 #   "dir" is a directory that contains waveform files and transcription files:
 #
@@ -25,6 +25,7 @@
 #
 
 use File::Basename 'fileparse';
+use Getopt::Long;
 
 ######################################################################
 ######################################################################
@@ -32,9 +33,6 @@ use File::Basename 'fileparse';
 
 ## data directory
 $datadir = "./wav";
-if (defined $ARGV[0]) {
-    $datadir = $ARGV[0];
-}
 
 ## set to 1 to disable inserting silence at begin/end of sentence
 $disable_silence_at_ends=0;
@@ -65,6 +63,18 @@ $OPTARGS="-input file";	# raw speech file input
 
 ## offset for result in ms: 25ms / 2
 $offset_align = 0.0125;
+
+## parse arguments
+GetOptions (
+  'datadir=s' => \$datadir,
+  'disable_silence_at_ends=i' => \$disable_silence_at_ends,
+  'leave_dict_flag=i' => \$leave_dict_flag,
+  'debug_flag=i' => \$debug_flag,
+  'juliusbin=s' => \$juliusbin,
+  'hmmdefs=s' => \$hmmdefs,
+  'OPTARGS=s' => \$OPTARGS,
+  'offset_align=f' => \$offset_align
+) or exit(1);
 
 ######################################################################
 ######################################################################
@@ -309,7 +319,7 @@ sub yomi2voca {
     s/ろぉ/ r o:/g;
     s/わぁ/ w a:/g;
     s/をぉ/ o:/g;
-    
+
     s/う゛/ b u/g;
     s/でぃ/ d i/g;
     s/でぇ/ d e:/g;
@@ -490,4 +500,3 @@ sub yomi2voca {
 
     return $_;
 }
-    
